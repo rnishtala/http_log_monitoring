@@ -2,8 +2,8 @@
 import argparse
 import sys
 import asyncio
-from http_log_monitoring import HttpMonitoring, Log
-from utils import (print_traffic_stats, print_traffic_volume,
+from http_log_monitoring.http_log_monitoring import HttpMonitoring, Log
+from http_log_monitoring.utils import (print_traffic_stats, print_traffic_volume,
                    reset_stats, reset_counter, capture_traffic_counts)
 
 

@@ -27,19 +27,60 @@ Features
 * Computes various traffic statistics
 * Generates an alert if the traffic count is > 10 per second (average over 2 mins)
 * Clears an active alert if the traffic count is < 10 per second (default)
+* Tested with: https://github.com/xuwenyihust/lunaticlog
 
+Future improvements
+-------------------
+* The current service stores up to 2 minutes of data in memory, this could be increased to be a day
+* More relevant statistics could be displayed at the top
+* A data store could be introduced to store long term statistics
+* This service could be deployed in a cluster (Kubernetes/docker-compose) with a load balancer in front
+* The unit-test coverage could be improved
+
+Development
+------------
+To run tests (including alert generation tests)
+
+.. code-block:: console
+
+    $ make clean
+    $ make test
+
+
+Installation
+-------------
+.. code-block:: console
+
+    $ git clone git://github.com/rnishtala/http_log_monitoring
+
+.. code-block:: console
+
+    $ make install
+
+Alternative Installation
+------------------------
+.. code-block:: console
+
+    $ git clone git://github.com/rnishtala/http_log_monitoring
+    $ make dist
+    $ pip install dist/http_log_monitoring-0.0.1-py2.py3-none-any.whl
 
 Usage
 -------
 
-To use http_log_monitoring in a project, run the cli script below
+To use http_log_monitoring in a project, run the cli script below:
+Its also in http_log_monitoring/cli.py
+
+.. code-block:: console
+
+    $ python cli.py --threshold 5 --logfile /tmp/access.log
 
 .. code-block:: python
 
         import sys
         import asyncio
-        from http_log_monitoring import HttpMonitoring, Log
-        from utils import (print_traffic_stats, print_traffic_volume,
+        from http_log_monitoring.http_log_monitoring import HttpMonitoring, Log
+        from http_log_monitoring.utils import (print_traffic_stats, print_traffic_volume,
                            reset_stats, reset_counter, capture_traffic_counts)
 
         async def main():

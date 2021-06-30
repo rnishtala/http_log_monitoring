@@ -1,4 +1,5 @@
 [
-{"ip": "174.65.42.165", "user": "michael", "timestamp": "26/Jun/2021:23:28:47", "section": "user", "resource": "test/apache_pb.gif", "status": "200"},
-{"ip": "127.0.0.1", "user": "james", "timestamp": "09/May/2018:16:00:39", "section": "report", "resource": "", "status": "200"}
+{"ip": "174.65.42.165", "user": "michael", "user (IP)": "michael (174.65.42.165)", "timestamp": "26/Jun/2021:23:28:47", "section": "user (section)", "resource": "test/apache_pb.gif", "status": "200", "state_code": "State code (200)"},
+{"ip": "127.0.0.1", "user": "james", "user (IP)": "james (127.0.0.1)", "timestamp": "09/May/2018:16:00:39", "section": "report (section)", "resource": "", "status": "500", "state_code": "State code (500)"},
+{"ip": "127.0.0.1", "user": "james", "user (IP)": "james (127.0.0.1)", "timestamp": "09/May/2018:16:00:39", "section": "report (section)", "resource": "", "status": "500", "state_code": "State code (500)"}
 ]

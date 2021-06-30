@@ -10,12 +10,16 @@ from http_log_monitoring.http_log_monitoring import Log, HttpMonitoring
 test_log = pkg_resources.resource_filename(__name__, "test.log")
 data_path = pkg_resources.resource_filename(__name__, "data.json")
 data_stats_path = pkg_resources.resource_filename(__name__, "data_stats.json")
+section_stats_path = pkg_resources.resource_filename(__name__, "section_stats.json")
 
 with open(data_path, encoding='utf-8', errors='ignore') as json_data:
     data = json.load(json_data, strict=False)
 
 with open(data_stats_path, encoding='utf-8', errors='ignore') as json_data:
     data_stats = json.load(json_data, strict=False)
+
+with open(section_stats_path, encoding='utf-8', errors='ignore') as json_data:
+    section_stats = json.load(json_data, strict=False)
 
 with open(test_log, encoding='utf-8', errors='ignore') as logs:
     test_logs = logs.readlines()
@@ -41,6 +45,7 @@ async def test_data_stats(mocker):
     log_monitor = HttpMonitoring(logfile)
     await log_monitor.compute_stats()
     assert log_monitor.stats == data_stats
+    assert log_monitor.top_section_stats == section_stats
 
 @pytest.mark.asyncio
 async def test_traffic_counter(mocker):
@@ -49,10 +54,11 @@ async def test_traffic_counter(mocker):
                  mock_logs)
     log_monitor = HttpMonitoring(logfile)
     await log_monitor.traffic_counter()
-    assert log_monitor.counter == 2
+    assert log_monitor.counter == 3
 
 @pytest.mark.asyncio
 async def test_generate_alert(mocker):
+    """Test alert generation"""
     logfile = open(test_log,"r")
     mocker.patch('http_log_monitoring.http_log_monitoring.HttpMonitoring.stream_logs',
                  mock_logs)
@@ -64,6 +70,7 @@ async def test_generate_alert(mocker):
 
 @pytest.mark.asyncio
 async def test_clear_alert(mocker):
+    """Test alert clearing/resolution"""
     logfile = open(test_log,"r")
     mocker.patch('http_log_monitoring.http_log_monitoring.HttpMonitoring.stream_logs',
                  mock_logs)
